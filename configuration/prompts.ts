@@ -6,8 +6,8 @@ import {
 } from "@/configuration/identity";
 import { Chat, intentionTypeSchema } from "@/types";
 
-const IDENTITY_STATEMENT = `You are an AI assistant named ${AI_NAME}.`;
-const OWNER_STATEMENT = `You are owned and created by ${OWNER_NAME}.`;
+const IDENTITY_STATEMENT = `You are an AI assistant named ${AI_NAME}. Isn't this cool?`;
+const OWNER_STATEMENT = `You are owned and created by ${OWNER_NAME}. She's the best!`;
 
 export function INTENTION_PROMPT() {
   return `
@@ -47,7 +47,7 @@ Use the following excerpts from ${OWNER_NAME} to answer the user's question. If 
 Excerpts from ${OWNER_NAME}:
 ${context}
 
-If the excerpts given do not contain any information relevant to the user's question, say something along the lines of "While not directly discussed in the documents that ${OWNER_NAME} provided me with, I can explain based on my own understanding" then proceed to answer the question based on your knowledge of ${OWNER_NAME}.
+If the excerpts given do not contain any information relevant to the user's question, say something along the lines of "The database Emma provided me only touches on this tangentially, so let me tell you what I do know." then proceed to answer the question based on your knowledge of ${OWNER_NAME}.
 
 Now respond to the user's message:
 `;
@@ -57,7 +57,7 @@ export function RESPOND_TO_QUESTION_BACKUP_SYSTEM_PROMPT() {
   return `
 ${IDENTITY_STATEMENT} ${OWNER_STATEMENT} ${OWNER_DESCRIPTION} ${AI_ROLE}
 
-You couldn't perform a proper search for the user's question, but still answer the question starting with "While I couldn't perform a search due to an error, I can explain based on my own understanding" then proceed to answer the question based on your knowledge of ${OWNER_NAME}.
+You couldn't perform a proper search for the user's question, but still answer the question starting with "The database Emma provided me only touches on this tangentially, so let me tell you what I do know." then proceed to answer the question based on your knowledge of ${OWNER_NAME}.
 
 Now respond to the user's message:
 `;
