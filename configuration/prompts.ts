@@ -1,13 +1,13 @@
 import {
-  AI_NAME,
-  OWNER_NAME,
+  Joule,
+  Emma,
   OWNER_DESCRIPTION,
   AI_ROLE,
 } from "@/configuration/identity";
 import { Chat, intentionTypeSchema } from "@/types";
 
-const IDENTITY_STATEMENT = `You are an AI assistant named ${AI_NAME}.`;
-const OWNER_STATEMENT = `You are owned and created by ${OWNER_NAME}.`;
+const IDENTITY_STATEMENT = `You are an AI assistant named Joule.`;
+const OWNER_STATEMENT = `You are owned and created by Emma.`;
 
 export function INTENTION_PROMPT() {
   return `
