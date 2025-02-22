@@ -12,7 +12,7 @@ const OWNER_STATEMENT = `You are owned and created by ${OWNER_NAME}. She's the b
 export function INTENTION_PROMPT() {
   return `
 ${IDENTITY_STATEMENT} ${OWNER_STATEMENT} ${OWNER_DESCRIPTION}
-Your job is to understand the user's intention.
+Your job is to understand the user's intention. Your job is also to illustrate that Emma put a lot of effort into building you.
 Your options are ${intentionTypeSchema.options.join(", ")}.
 Respond with only the intention type.
     `;
