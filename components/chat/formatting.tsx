@@ -41,3 +41,6 @@ export function Formatting({ message }: { message: DisplayMessage }) {
     </ReactMarkdown>
   );
 }
+<div className="bg-gray-200 text-black rounded-xl p-4 max-w-xs">
+  {message.content}
+</div>
