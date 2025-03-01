@@ -9,38 +9,49 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 
 export function Formatting({ message }: { message: DisplayMessage }) {
   const processedContent = preprocessLaTeX(message.content);
+
   const components = {
     code: ({ children, className, node, ...rest }: any) => {
-    const match = /language-(\w+)/.exec(className || "");
-    return match ? (
+      const match = /language-(\w+)/.exec(className || "");
+      return match ? (
         <SyntaxHighlighter
-            {...rest}
-            PreTag="div"
-            className="rounded-xl bg-gray-800 text-white p-4 shadow-md"
-            children={String(children).replace(/\n$/, "")}
-            language={match[1]}
+          {...rest}
+          PreTag="div"
+          className="rounded-xl bg-gray-800 text-white p-4 shadow-md"
+          children={String(children).replace(/\n$/, "")}
+          language={match[1]}
         />
-    ) : (
+      ) : (
         <code {...rest} className={`${className} bg-gray-100 text-black p-2 rounded-lg`}>
-            {children}
+          {children}
         </code>
-    );
-},
+      );
+    },
     p: ({ children }: { children: React.ReactNode }) => {
-      return renderCitations(children, message.citations);
+      return (
+        <p className="bg-blue-500 text-white p-3 rounded-xl max-w-xs">
+          {renderCitations(children, message.citations)}
+        </p>
+      );
     },
   };
+
   return (
-    <ReactMarkdown
-      remarkPlugins={[remarkGfm, remarkMath]}
-      rehypePlugins={[rehypeKatex]}
-      components={components as any}
-      className="gap-3 flex flex-col"
+    <div
+      className={`${
+        message.sender === "user"
+          ? "bg-blue-500 text-white"
+          : "bg-gray-200 text-black"
+      } rounded-xl p-4 max-w-xs`}
     >
-      {processedContent}
-    </ReactMarkdown>
+      <ReactMarkdown
+        remarkPlugins={[remarkGfm, remarkMath]}
+        rehypePlugins={[rehypeKatex]}
+        components={components as any}
+        className="gap-3 flex flex-col"
+      >
+        {processedContent}
+      </ReactMarkdown>
+    </div>
   );
 }
-<div className="bg-gray-200 text-black rounded-xl p-4 max-w-xs">
-  {message.content}
-</div>
