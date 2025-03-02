@@ -9,13 +9,6 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 
 export function Formatting({ message }: { message: DisplayMessage }) {
   const processedContent = preprocessLaTeX(message.content);
-
-  // Apply a green background if the message is from the user
-  const messageStyle =
-    message.role === "user"
-      ? "bg-green-500 text-white p-2 rounded-xl" // Green background for user messages
-      : "bg-gray-100 text-black p-2 rounded-xl"; // Default style for AI messages
-
   const components = {
     code: ({ children, className, node, ...rest }: any) => {
       const match = /language-(\w+)/.exec(className || "");
@@ -37,21 +30,13 @@ export function Formatting({ message }: { message: DisplayMessage }) {
       return renderCitations(children, message.citations);
     },
   };
-
   return (
-    <div className={messageStyle}>
-      <ReactMarkdown
-        remarkPlugins={[remarkGfm, remarkMath]}
-        rehypePlugins={[rehypeKatex]}
-        components={components as any}
-        className="gap-3 flex flex-col"
-      >
-        {processedContent}
-      </ReactMarkdown>
-    </div>
-  );
-}
-
+    <ReactMarkdown
+      remarkPlugins={[remarkGfm, remarkMath]}
+      rehypePlugins={[rehypeKatex]}
+      components={components as any}
+      className="gap-3 flex flex-col"
+    >
       {processedContent}
     </ReactMarkdown>
   );
